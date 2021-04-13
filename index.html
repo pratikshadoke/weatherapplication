@@ -337,8 +337,6 @@
                 status.style.display="block";
                 tempbox.style.display = "block";
                 locis.style.display = "block";
-                changeimage();
-                
                 let now = new Date();
                 let date = document.getElementById('date');
                 
@@ -443,7 +441,6 @@
                     const { id, main } = weatherData.weather[0];
                     const cityname = name;
                     console.log(cityname)
-
                     const d = new Date();
                     console.log(d);
                     locis.innerText = cityname;
@@ -454,6 +451,7 @@
                     console.log(templess);
                     if (templess < 24 || templess < 0) {
                         wbox.style.backgroundImage = "url('cold-bg.jpg')";
+                        return true;
                     }
                     else if (id < 600 && id > 500) {
                         wbox.style.backgroundImage = "url('rainis.jpg')";
@@ -481,6 +479,7 @@
                     else if (id > 800) {
                         weather_icon.src = "partly-cloudy-night.svg"
                     }
+                    changeimage();
                     return true;
                 }
 
