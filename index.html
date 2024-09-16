@@ -46,7 +46,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -63,9 +63,7 @@
 
         .background_one {
             background-image: url('suniss.svg');
-            width: 220px;
             font-weight: 600;
-
             height: 100px;
             display: flex;
             justify-content: center;
@@ -76,9 +74,7 @@
 
         .background_two {
             background-image: url('moonis.svg');
-            width: 220px;
             height: 100px;
-
             display: flex;
             justify-content: center;
             align-items: center;
@@ -124,26 +120,27 @@
             </ul>
         </div>
     </nav>
-    <section id="home">
+    <section id="home" >
         <div class="mb-3 d-flex justify-content-center align-items-center ">
-            <form action="#" onsubmit="getdata()">
+            <form action="#">
                 <div class="text-center mt-4" id='icon-holder'>
                     <input type="name" class="form-control text-center" id="inputcity" style="text-transform: capitalize;background-color: transparent;color:#fff;border-color: #fff;border-radius:20px 20px 0px 20px;padding: 15px;box-shadow: 3px 4px rgba(227, 220, 251 
                         ,0.5);" placeholder="Enter City Here" autocomplete="off" required>
+
                 </div>
 
                 <div id='button-box' data-aos="rotate-c"
                     class="background_one d-flex justify-content-center align-items-center  text-center mt-4"
-                    style="width:220px;height:100px;background-repeat: no-repeat;background-position: center;">
+                    style="background-repeat: no-repeat;background-position: center;">
                     <button id="search-button" type="submit" class="btn btn-primary font-weight-bold" style="background: none !important;border:none;transition-property: all;
                         transition-duration: 0.5s;
-                        transition-timing-function: cubic-bezier(0.65,-0.25,0.25,1.95);" onclick="changeimage()"
-                        aria-required="true">Search</button>
+                        transition-timing-function: cubic-bezier(0.65,-0.25,0.25,1.95);" aria-required="true"
+                        >Search</button>
                 </div>
 
             </form>
         </div>
-        <div class="d-flex align-items-center">
+        <div class="container d-flex align-items-center" style="display: none;">
             <ul class="list-group p-3 mx-auto">
                 <li id="weather-box" class="list-group-item text-center align-items-center" style="background-image:url('warm-bg.jpg');
       background-position: bottom;background-size: cover;transition: 0.4 ease-out;
@@ -151,37 +148,38 @@
                     <div class="row">
                         <div class="col-auto">
                             <div class=" h2 mt-2 d-flex justify-content-center align-items-center text-center text-white"
-                                style="font-weight: bold;"><img src="location.svg" alt="" style="width: 50px;
-                                height: 50px;">
+                                style="font-weight: bold;display: none;"><img id="imgicon" src="location.svg" alt="" style="width: 50px;
+                                height: 50px;display: none;">
                                 <div id="locdata"
                                     class="mt-3 d-flex justify-content-center align-items-center text-center h4"
                                     style="color: #FFFFFF;display: none; "></div>
                             </div>
                             <div class="large d-flex justify-content-center align-items-center font-weight-bold font- mt-2"
                                 style="color: #FFFFFF;">
-                                <div id="date" class="h5 text-center"></div>
+                                <div id="date" class="h5 text-center" style="display: none;"></div>
                             </div>
                             <div class="clock large d-flex justify-content-center align-items-center font-weight-bold font- mt-2"
                                 style="color: #FFFFFF;">
 
                                 <div id="display-time" class="h4 text-center"
-                                    style="font-family: 'Fredoka One', cursive;text-shadow:2px 4px rgb(1, 1, 1,0.3);">
+                                    style="font-family: 'Fredoka One', cursive;text-shadow:2px 4px rgb(1, 1, 1,0.3);display: none;">
                                 </div>
                             </div>
                             <div class="large d-flex justify-content-center align-items-center font-weight-bold  mt-2"
-                                style="color: #FFFFFF;background: #BDC3C7; opacity: 0.5;padding: 8px;border-radius: 150px 0 150px 0px;display:none;text-shadow:2px 4px rgb(1, 1, 1,0.3);box-shadow: 3px 4px rgba(93, 109, 126,0.5);" data-aos="flip-down">
-                                
-                                <img id="weather_icon" src="" data-aos="fade-up" >
-                            
+                                style="color: #FFFFFF;background: #BDC3C7; opacity: 0.5;padding: 8px;border-radius: 150px 0 150px 0px;display:none;text-shadow:2px 4px rgb(1, 1, 1,0.3);box-shadow: 3px 4px rgba(93, 109, 126,0.5);display: none;"
+                                data-aos="flip-down">
+
+                                <img id="weather_icon" src="" data-aos="fade-up">
+
                             </div>
 
                             <div class="large d-flex justify-content-center align-items-center font-weight-bold font- mt-2"
-                                style="color: #FFFFFF;">
-                                <div id="status" class="h2 text-center" data-aos="fade-right"></div>
+                                style="color: #FFFFFF;" style="display: none;">
+                                <div id="status" class="h2 text-center" data-aos="fade-right" style="display: none;"></div>
                             </div>
                             <div id="tempbox"
                                 class="large d-flex justify-content-center align-items-center font-weight-bold font- mt-2"
-                                style="color: #FFFFFF;">
+                                style="color: #FFFFFF;display: none;">
                                 <div id="temp" class="counter h2 text-center " data-aos="flip-up" style="font-family: 'Fredoka One', cursive;color: #111111;background: #fff; opacity: 0.7;padding: 8px;border-radius: 8px;display:none;text-shadow:2px 4px rgb(1, 1, 1,0.3);box-shadow: 3px 4px rgba(187, 222, 251 
                                     ,0.5);">
                                 </div>
@@ -225,7 +223,7 @@
         </section>
         <section id="explanation" class="font-weight-bold" class="mt-4">
             <div class="h1 text-center " style="background: transparent;color: #fff;" data-aos="zoom-in-up">
-                <i class="fas fa-glasses"></i>Explanation
+                <i class="fas fa-code"></i>Explanation
             </div>
             <div class="d-flex align-items-center">
                 <ul class="list-group p-3 mx-auto" style="width: fit-content; " data-aos="zoom-in-down">
@@ -235,36 +233,42 @@
 
                             <div class="col-auto">
                                 <div class="h5 large font-weight-bold text-center  mt-2" style="color: #fff;">
-                                    After successful submission weather status will fetch as below shows in image according to your city</div>
+                                    After successful submission weather status will fetch as below shows in image
+                                    according to your city</div>
 
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
-                                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                     </ol>
                                     <div class="carousel-inner">
-                                      <div class="carousel-item active">
-                                        <img class="d-block w-100" style="border-radius: 4px;" src="OUTPUT1.png" alt="First slide">
-                                      </div>
-                                      <div class="carousel-item">
-                                        <img class="d-block w-100" style="border-radius: 4px;"src="OUTPUT2.png" alt="Second slide">
-                                      </div>
-                                      
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" style="border-radius: 4px;" src="OUTPUT1.png"
+                                                alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" style="border-radius: 4px;" src="OUTPUT2.png"
+                                                alt="Second slide">
+                                        </div>
+
                                     </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                      <span class="sr-only">Previous</span>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                      <span class="sr-only">Next</span>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
                                     </a>
-                                  </div>
+                                </div>
 
                             </div>
                     </li>
-                    
+
                 </ul>
             </div>
 
@@ -305,37 +309,45 @@
             duration: 1200,
         })
         let clock = document.getElementsByClassName('clock');
+        let erroris = document.getElementById('error');
         let locis = document.getElementById("locdata");
         let weather_icon = document.getElementById("weather_icon");
         let tempicon = document.getElementById("temp");
+        let imgicon = document.getElementById("imgicon");
+        let displaytime = document.getElementById("display-time");
+        let dateis = document.getElementById("date");
         let tempvalue = document.getElementById("temp-value");
         let status = document.getElementById("status");
         let btnbox = document.getElementById('button-box');
+        let container = document.getElementsByClassName('container');
         let iconfile;
         const searchInput = document.getElementById("inputcity");
         const searchButton = document.getElementById("search-button");
         let wbox = document.getElementById("weather-box");
         let tempbox = document.getElementById("tempbox");
-        function getdata() {
-            getWeather(searchInput.value);
-            searchInput.value = '';
-            wbox.style.display = "block";
-            temp.style.display = "block";
-            tempbox.style.display = "block";
-            locis.style.display = "block";
+        $(document).ready(function () {
+            $('#search-button').click(function () {
+                getWeather(searchInput.value);
+                searchInput.value = '';
+                imgicon.style.display="block";
+                dateis.style.display="block";
+                displaytime.style.display="block";
+                wbox.style.display = "block";
+                temp.style.display = "block";
+                status.style.display="block";
+                tempbox.style.display = "block";
+                locis.style.display = "block";
+                let now = new Date();
+                let date = document.getElementById('date');
+                
+                date.innerText = dateBuilder(now);
+                timeis();
 
+                
 
-            let now = new Date();
-            let date = document.getElementById('date');
-            let dtime = document.getElementById('display-time');
-            date.innerText = dateBuilder(now);
-            console.log(dtime)
+            });
+        })
 
-            dtime.innerText = timeis(now);
-
-
-
-        };
 
         function dateBuilder(d) {
             let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -348,111 +360,146 @@
 
             return `${day}, ${date} ${month} ${year}`;
         }
-        function timeis(d) {
-            let h = d.getHours();
-            let m = d.getMinutes();
-            let s = d.getSeconds();
-
-            if (h > 12)
-                h = h - 12;
-            return `${(h < 0) ? '0' + h : h} : ${(m < 0) ? '0' + m : m} : ${(s < 0) ? '0' + s : s}`;
-
-
-
+       
+            
+        setInterval(timeis, 1000);
+        function timeis() {
+            let time = new Date();
+            let hour = time.getHours();
+            let min = time.getMinutes();
+            let sec = time.getSeconds();
+            am_pm = "AM";
+  
+            if (hour > 12) {
+                hour -= 12;
+                am_pm = " PM";
+            }
+            if (hour == 0) {
+                hr = 12;
+                am_pm = " AM";
+            }
+  
+            hour = hour < 10 ? "0" + hour : hour;
+            min = min < 10 ? "0" + min : min;
+            sec = sec < 10 ? "0" + sec : sec;
+  
+            let currentTime = hour + " : " 
+                + min + " : " + sec + am_pm;
+  
+           
+                displaytime.innerHTML = currentTime;
         }
+  
+        
+
+        
 
 
         function changeimage() {
-            
             if (btnbox.classList) {
-                
 
-                    btnbox.classList.toggle('background_two');
+                btnbox.classList.toggle('background_two');
 
-                }
-                else {
-
-                    btnbox.classList.toggle('background_one');
-                }
             }
+            else {
 
-
-
-
-        
-        function checkip() {
-
-            if (searchInput.value != "")
-
-                return false;
-
-
+                btnbox.classList.toggle('background_one');
+            }
         }
 
+
+
+
+
+       
+
         const getWeather = async (city) => {
+
             try {
-                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=dab3af44de7d24ae7ff86549334e45bd`);
-                const weatherData = await response.json();
-                const { name } = weatherData;
-                const { feels_like } = weatherData.main;
-                const { id, main } = weatherData.weather[0];
-                const cityname = name;
-                console.log(cityname)
 
-                const d = new Date();
-                console.log(d);
-                locis.innerText = cityname;
-                tempicon.innerHTML = Math.round(feels_like - 273) + ' °c';
-                status.innerHTML = main;
-                console.log(weatherData);
-                templess = Math.round(feels_like - 273);
-                console.log(templess);
-                if (templess < 24 || templess < 0) {
-                    wbox.style.backgroundImage = "url('cold-bg.jpg')";
-                }
-                else if (id < 600 && id > 500) {
-                    wbox.style.backgroundImage = "url('rainis.jpg')";
-                }
-                console.log(Math.round(feels_like - 273));
-                console.log(id, main);
-                if (id < 300 && id > 200) {
-                    weather_icon.src = "thunderstorms-day.svg"
-                }
-                else if (id < 400 && id > 300) {
-                    weather_icon.src = "drizzle.svg"
-                }
-                else if (id < 600 && id > 500) {
-                    weather_icon.src = "rain.svg"
-                }
-                else if (id < 700 && id >= 600) {
-                    weather_icon.src = "snow.svg"
-                }
-                else if (id < 800 && id > 700) {
-                    weather_icon.src = "cloudy.svg"
-                }
-                else if (id == 800) {
-                    weather_icon.src = "clear-day.svg"
-                }
-                else if (id > 800) {
-                    weather_icon.src = "partly-cloudy-night.svg"
+                if (city === "") {
+                    
+                    swal({
+                        title: "City cannot be empty!!!!",
+                        text: 'Please enter valid city name',
+                        icon: 'error',
+                    });
+                    return false;
                 }
 
+
+
+
+
+
+
+                else {
+                    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=dab3af44de7d24ae7ff86549334e45bd`);
+                    const weatherData = await response.json();
+                    const { name } = weatherData;
+                    const { feels_like } = weatherData.main;
+                    const { id, main } = weatherData.weather[0];
+                    const cityname = name;
+                    console.log(cityname)
+                    const d = new Date();
+                    console.log(d);
+                    locis.innerText = cityname;
+                    tempicon.innerHTML = Math.round(feels_like - 273) + ' °c';
+                    status.innerHTML = main;
+                    console.log(weatherData);
+                    templess = Math.round(feels_like - 273);
+                    console.log(templess);
+                    if (templess < 24 || templess < 0) {
+                        wbox.style.backgroundImage = "url('cold-bg.jpg')";
+                        return true;
+                    }
+                    else if (id < 600 && id > 500) {
+                        wbox.style.backgroundImage = "url('rainis.jpg')";
+                    }
+                    console.log(Math.round(feels_like - 273));
+                    console.log(id, main);
+                    if (id < 300 && id > 200) {
+                        weather_icon.src = "thunderstorms-day.svg"
+                    }
+                    else if (id < 400 && id > 300) {
+                        weather_icon.src = "drizzle.svg"
+                    }
+                    else if (id < 600 && id > 500) {
+                        weather_icon.src = "rain.svg"
+                    }
+                    else if (id < 700 && id >= 600) {
+                        weather_icon.src = "snow.svg"
+                    }
+                    else if (id < 800 && id > 700) {
+                        weather_icon.src = "cloudy.svg"
+                    }
+                    else if (id == 800) {
+                        weather_icon.src = "clear-day.svg"
+                    }
+                    else if (id > 800) {
+                        weather_icon.src = "partly-cloudy-night.svg"
+                    }
+                    changeimage();
+                    return true;
+                }
 
             }
+
             catch (error) {
+
                 wbox.style.display = "none";
                 tempbox.style.display = "none";
                 locis.style.display = "none";
                 swal({
                     title: "City not found!",
                     text: 'Please enter valid city name',
-
                     icon: 'error',
-
 
                 });
             }
-        };
+        }
+
+
 
 
     </script>
