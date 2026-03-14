@@ -20,21 +20,26 @@ jobs:
         run: |
           IMAGE_NAME=weather_app
           docker build -t $IMAGE_NAME:latest .
+      - name: Save Docker image
+        run: docker save myweatherapp:latest -o myweatherapp.tar
 
-      - name: Deploy to EC2
+      - name: Copy image to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: myweatherapp.tar
+          target: ~/myweatherapp.tar
+
+      - name: Load & run image on EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            IMAGE_NAME=weather_app
-            CONTAINER_NAME=weather_app
-            # Copy image to EC2
-            docker save $IMAGE_NAME:latest | bzip2 | ssh -i ${{ secrets.EC2_KEY }} ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'bunzip2 | docker load'
-            # Stop & remove old container if exists
-            docker stop $CONTAINER_NAME || true
-            docker rm $CONTAINER_NAME || true
-            # Run new container
-            docker run -d --name $CONTAINER_NAME -p 80:80 $IMAGE_NAME:latest
-            echo "Deployment completed successfully!"
+            docker load -i ~/myweatherapp.tar
+            docker stop weather_app || true
+            docker rm weather_app || true
+            docker run -d --name weather_app -p 80:80 myweatherapp:latest
