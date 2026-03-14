@@ -9,27 +9,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
+      # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Set up Docker Buildx
+      # Setup Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # 3️⃣ Build Docker image
+      # Build image
       - name: Build Docker image
-        run: |
-          IMAGE_NAME=weather_app
-          docker build -t $IMAGE_NAME:latest .
+        run: docker build -t weather_app:latest .
 
-      # 4️⃣ Save Docker image to tar file
+      # Save image
       - name: Save Docker image
         run: docker save weather_app:latest -o weather_app.tar
 
-      # 5️⃣ Clean previous tar on EC2
-      # Clean previous tar on EC2
-      - name: Clean previous Docker tar on EC2
+      # Clean old files on EC2
+      - name: Clean previous files on EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -38,18 +35,18 @@ jobs:
           script: |
             rm -rf ~/weather_app.tar
 
-      # Copy Docker image tar to EC2
+      # Copy tar file
       - name: Copy Docker image to EC2
-        uses: appleboy/scp-action@master
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           source: weather_app.tar
-          target: ~/weather_app.tar
+          target: ~
 
-      # Load and run Docker image
-      - name: Load & run Docker image on EC2
+      # Deploy container
+      - name: Deploy container on EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
