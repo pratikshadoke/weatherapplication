@@ -8,52 +8,38 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      # Checkout repository
+      # 1️⃣ Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Setup Docker
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      # 2️⃣ Login to GitHub Container Registry
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      # Build image
+      # 3️⃣ Build Docker image
       - name: Build Docker image
-        run: docker build -t weather_app:latest .
+        run: |
+          docker build -t ghcr.io/${{ github.repository_owner }}/weather_app:latest .
 
-      # Save image
-      - name: Save Docker image
-        run: docker save weather_app:latest -o weather_app.tar
+      # 4️⃣ Push Docker image
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/weather_app:latest
 
-      # Clean old files on EC2
-      - name: Clean previous files on EC2
+      # 5️⃣ Deploy on EC2
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            rm -rf ~/weather_app.tar
-
-      # Copy tar file
-      - name: Copy Docker image to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          source: weather_app.tar
-          target: ~
-
-      # Deploy container
-      - name: Deploy container on EC2
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            docker load -i ~/weather_app.tar
+            docker pull ghcr.io/${{ github.repository_owner }}/weather_app:latest
             docker stop weather_app || true
             docker rm weather_app || true
-            docker run -d --name weather_app -p 80:80 weather_app:latest
+            docker run -d --name weather_app -p 80:80 ghcr.io/${{ github.repository_owner }}/weather_app:latest
