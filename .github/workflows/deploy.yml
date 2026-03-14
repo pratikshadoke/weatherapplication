@@ -28,15 +28,17 @@ jobs:
         run: docker save weather_app:latest -o weather_app.tar
 
       # 5️⃣ Clean previous tar on EC2
+      # Clean previous tar on EC2
       - name: Clean previous Docker tar on EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-          script: rm -f ~/weather_app.tar
+          script: |
+            rm -rf ~/weather_app.tar
 
-      # 6️⃣ Copy image tar to EC2
+      # Copy Docker image tar to EC2
       - name: Copy Docker image to EC2
         uses: appleboy/scp-action@master
         with:
@@ -46,7 +48,7 @@ jobs:
           source: weather_app.tar
           target: ~/weather_app.tar
 
-      # 7️⃣ Load Docker image and run container on EC2
+      # Load and run Docker image
       - name: Load & run Docker image on EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
