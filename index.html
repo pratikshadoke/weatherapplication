@@ -255,7 +255,7 @@
       const { name } = data;
       const { feels_like } = data.main;
       const { main, id } = data.weather[0];
-      const roundedTemp = Math.round(feels_like - 273.15);
+      const roundedTemp = Math.round(feels_like);
 
       locis.textContent = name;
       temp.textContent = `${roundedTemp} °C`;
